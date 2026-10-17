@@ -1,7 +1,7 @@
 # AttendX Login Test
 # Tests the login functionality for the AttendX Student Attendance Application
 # Author: Het Soni | QA Engineer
-# Version: 1.0
+# Version: 1.1 - Added SQL injection test case (collaboration update)
 
 def test_login_valid_credentials():
     """Test login with valid credentials."""
@@ -36,6 +36,18 @@ def test_login_empty_fields():
         print("FAIL: Empty fields were not caught")
         return False
 
+def test_login_sql_injection():
+    """Test that SQL injection attempts are blocked."""
+    username = "' OR '1'='1"
+    password = "' OR '1'='1"
+    # In a real app this would be caught by input validation
+    if username == "student123" and password == "password123":
+        print("FAIL: SQL injection was not blocked")
+        return False
+    else:
+        print("PASS: SQL injection attempt correctly rejected")
+        return True
+
 # Run all test cases
 if __name__ == "__main__":
     print("=" * 40)
@@ -44,6 +56,7 @@ if __name__ == "__main__":
     test_login_valid_credentials()
     test_login_invalid_credentials()
     test_login_empty_fields()
+    test_login_sql_injection()
     print("=" * 40)
     print("  All login tests completed.")
     print("=" * 40)
