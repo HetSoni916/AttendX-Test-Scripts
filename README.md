@@ -67,3 +67,4 @@ python attendance_test.py
 
 ## Version History
 - **v1.0** - Initial commit: Added login and attendance test scripts
+- **v1.1** - Collaboration update: Added SQL injection test case to login_test.py *(edited directly on GitHub)*
